@@ -1,12 +1,15 @@
 import sqlite3
 from pathlib import Path
 
-# Ruta del archivo SQLite donde se guardan los datos del proyecto.
-DB_PATH = Path("data/library.db")
+# Carpeta raíz del proyecto: un nivel por encima de /app
+BASE_DIR = Path(__file__).resolve().parent.parent
+DATA_DIR = BASE_DIR / "data"
+DB_PATH = DATA_DIR / "library.db"
 
 
 def get_connection():
     """Devuelve una conexión abierta a la base de datos."""
+    DATA_DIR.mkdir(exist_ok=True)
     return sqlite3.connect(DB_PATH)
 
 
