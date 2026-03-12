@@ -155,7 +155,7 @@ def pedir_cambio_disponibilidad():
 
 def ejecutar_busqueda():
     """Pide un texto de búsqueda y muestra los libros encontrados."""
-    texto_busqueda = input("\nIntroduce título o autor a buscar: ").strip()
+    texto_busqueda = input("\nIntroduce título, autor o género a buscar: ").strip()
 
     if not texto_busqueda:
         print("\nDebes introducir un texto para buscar.")

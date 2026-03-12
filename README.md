@@ -25,15 +25,11 @@ python-sql-library-manager/
 ├── app/
 │   ├── main.py
 │   ├── crud.py
-│   ├── database.py
-│   ├── models.py
-│   └── utils.py
+│   └── database.py
 ├── data/
 │   └── library.db
-├── tests/
 ├── .gitignore
-├── README.md
-└── requirements.txt
+└── README.md
 ```
 
 ## Cómo ejecutar el proyecto
