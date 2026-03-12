@@ -102,3 +102,20 @@ def editar_libro(libro_id, titulo, autor, genero, anio):
     conn.close()
 
     return filas_afectadas
+
+
+def eliminar_libro(libro_id):
+    """Elimina un libro de la base de datos a partir de su ID."""
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        DELETE FROM libros
+        WHERE id = ?
+    """, (libro_id,))
+
+    conn.commit()
+    filas_afectadas = cursor.rowcount
+    conn.close()
+
+    return filas_afectadas

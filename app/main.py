@@ -5,7 +5,8 @@ from crud import (
     actualizar_disponibilidad,
     buscar_libros,
     obtener_libro_por_id,
-    editar_libro
+    editar_libro,
+    eliminar_libro
 )
 
 ANIO_MINIMO = 1450
@@ -20,6 +21,7 @@ def mostrar_menu():
     print("3. Cambiar disponibilidad")
     print("4. Buscar libros")
     print("5. Editar libro")
+    print("6. Eliminar libro")
     print("0. Salir")
 
 
@@ -195,6 +197,46 @@ def ejecutar_edicion():
         print("\nLibro actualizado correctamente.")
 
 
+def ejecutar_eliminacion_libro():
+    """Pide un ID, muestra el libro encontrado y solicita confirmación antes de eliminarlo."""
+    libro_id = pedir_entero("\nIntroduce el ID del libro que quieres eliminar: ", minimo=1)
+    libro = obtener_libro_por_id(libro_id)
+
+    if libro is None:
+        print("\nNo existe ningún libro con ese ID.")
+        return
+
+    id_libro, titulo, autor, genero, anio, disponible = libro
+    estado = "Sí" if disponible == 1 else "No"
+
+    print("\nLibro encontrado:")
+    print(f"\nID: {id_libro}")
+    print(f"Título: {titulo}")
+    print(f"Autor: {autor}")
+    print(f"Género: {genero}")
+    print(f"Año: {anio}")
+    print(f"Disponible: {estado}")
+
+    while True:
+        confirmacion = input("\n¿Seguro que quieres eliminar este libro? (s = sí, n = volver al menú): ").strip().lower()
+
+        if confirmacion == "s":
+            filas_afectadas = eliminar_libro(libro_id)
+
+            if filas_afectadas == 0:
+                print("\nNo se pudo eliminar el libro.")
+            else:
+                print("\nLibro eliminado correctamente.")
+            break
+
+        elif confirmacion == "n":
+            print("\nEliminación cancelada.")
+            break
+
+        else:
+            print("\nIntroduce 's' para confirmar o 'n' para volver al menú principal.")
+
+
 create_table()
 
 while True:
@@ -227,6 +269,9 @@ while True:
 
     elif opcion == "5":
         ejecutar_edicion()
+
+    elif opcion == "6":
+        ejecutar_eliminacion_libro()
 
     elif opcion == "0":
         print("\nHasta luego.")
